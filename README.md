@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 # Team Task Manager
 
 Welcome to **Team Task Manager**, a robust and collaborative project management application designed to help teams organize, track, and accomplish their tasks efficiently. This production-ready To-Do app comes with built-in Role-Based Access Control (RBAC), allowing seamless collaboration between project admins and team members.
