@@ -47,11 +47,12 @@ export default function TaskBoard() {
     } catch (err) {
       console.error(err);
       if (err.response?.status === 403) {
-        navigate('/dashboard'); // Kick out if not authorized
+        navigate('/dashboard'); // Kick out if not authorized (get out of here lol)
       }
     }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/set-state-in-effect
   useEffect(() => { fetchProjectData(); }, [projectId]);
 
   const handleCreateOrUpdate = async () => {
@@ -88,7 +89,7 @@ export default function TaskBoard() {
     try {
       await API.put(`/tasks/${taskId}`, { status });
       fetchProjectData();
-    } catch (err) {
+    } catch {
       alert('Error updating status');
     }
   };
@@ -97,7 +98,7 @@ export default function TaskBoard() {
     try {
       await API.delete(`/tasks/${taskId}`);
       fetchProjectData();
-    } catch (err) {
+    } catch {
       alert('Error deleting task');
     }
   };
@@ -108,7 +109,7 @@ export default function TaskBoard() {
       await API.put(`/projects/${projectId}/members`, { userId: memberToAdd });
       fetchProjectData();
       setMemberToAdd('');
-    } catch (err) {
+    } catch {
       alert('Error adding member');
     }
   };
@@ -117,7 +118,7 @@ export default function TaskBoard() {
     try {
       await API.delete(`/projects/${projectId}/members/${userId}`);
       fetchProjectData();
-    } catch (err) {
+    } catch {
       alert('Error removing member');
     }
   };
@@ -140,7 +141,7 @@ export default function TaskBoard() {
   return (
     <div className="min-h-screen bg-[url('/bg.jpg')] bg-cover bg-center">
 
-      {/* Navbar */}
+
       <div className="flex justify-between items-center px-6 py-4">
         <h1 className="text-black text-2xl font-bold cursor-pointer" onClick={() => navigate('/dashboard')}>Team Task Manager</h1>
         <div className="flex items-center gap-4">
@@ -154,7 +155,7 @@ export default function TaskBoard() {
 
       <div className="px-6 pb-6">
 
-        {/* Header and Actions */}
+
         <div className="flex justify-between items-center mb-6 bg-black/60 p-4 rounded-xl border border-gray-700">
           <div>
             <h2 className="text-cyan-400 text-2xl font-bold">{project.name}</h2>
@@ -178,13 +179,13 @@ export default function TaskBoard() {
           )}
         </div>
 
-        {/* Manage Members Modal */}
+
         {showMemberModal && user?.role === 'admin' && (
           <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 px-4">
             <div className="bg-black border-2 border-cyan-400 rounded-xl w-full max-w-md p-6">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-cyan-400 text-xl font-bold">Project Members</h2>
-                <button onClick={() => setShowMemberModal(false)} className="text-gray-400 hover:text-white text-xl">✕</button>
+                <button onClick={() => setShowMemberModal(false)} className="text-gray-400 hover:text-white text-xl">X</button>
               </div>
               
               <div className="mb-4 flex gap-2">
@@ -216,7 +217,7 @@ export default function TaskBoard() {
           </div>
         )}
 
-        {/* Add/Edit Task Modal overlay */}
+
         {showForm && user?.role === 'admin' && (
           <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 px-4">
             <div className="bg-black border-2 border-cyan-400 rounded-xl p-6 w-full max-w-md">
@@ -276,7 +277,7 @@ export default function TaskBoard() {
           </div>
         )}
 
-        {/* Kanban Board */}
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
           {COLUMNS.map(col => (
             <div key={col.key} className="bg-black/80 border border-gray-800 rounded-xl p-4 shadow-xl">
@@ -302,8 +303,8 @@ export default function TaskBoard() {
                       <div className="text-white font-bold text-md pr-2">{task.title}</div>
                       {user?.role === 'admin' && (
                         <div className="flex gap-2">
-                          <button onClick={() => openEditForm(task)} className="text-blue-400 text-xs hover:text-blue-300 hover:scale-110 transition">✎</button>
-                          <button onClick={() => handleDelete(task._id)} className="text-red-400 text-xs hover:text-red-300 hover:scale-110 transition">✕</button>
+                          <button onClick={() => openEditForm(task)} className="text-blue-400 text-xs hover:text-blue-300 hover:scale-110 transition">Edit</button>
+                          <button onClick={() => handleDelete(task._id)} className="text-red-400 text-xs hover:text-red-300 hover:scale-110 transition">Delete</button>
                         </div>
                       )}
                     </div>
@@ -319,18 +320,18 @@ export default function TaskBoard() {
                       <div className="flex items-center gap-2">
                         {task.assignedTo && (
                           <span className="text-[11px] bg-gray-800 border border-gray-700 text-gray-300 px-2 py-1 rounded-md flex items-center gap-1">
-                            👤 {task.assignedTo.name.split(' ')[0]}
+                            {task.assignedTo.name.split(' ')[0]}
                           </span>
                         )}
                         {task.dueDate && (
                           <span className={`text-[11px] flex items-center gap-1 ${isOverdue(task) ? 'text-red-400 font-bold' : 'text-gray-500'}`}>
-                            📅 {new Date(task.dueDate).toLocaleDateString(undefined, {month:'short', day:'numeric'})}
+                            {new Date(task.dueDate).toLocaleDateString(undefined, {month:'short', day:'numeric'})}
                           </span>
                         )}
                       </div>
                     </div>
 
-                    {/* Status buttons */}
+
                     {canEditTaskStatus(task) && (
                       <div className="flex gap-2 mt-3 pt-3 border-t border-gray-800">
                         {COLUMNS.filter(c => c.key !== col.key).map(c => (
@@ -338,7 +339,7 @@ export default function TaskBoard() {
                             key={c.key}
                             onClick={() => handleStatus(task._id, c.key)}
                             className="flex-1 text-xs py-1.5 bg-gray-800 text-gray-300 hover:bg-cyan-400 hover:text-black rounded-lg cursor-pointer transition font-semibold"
-                          >→ {c.label}</button>
+                          >Move to {c.label}</button>
                         ))}
                       </div>
                     )}

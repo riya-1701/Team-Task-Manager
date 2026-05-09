@@ -7,17 +7,17 @@ export default function Dashboard() {
   const [stats, setStats] = useState({ total: 0, done: 0, progress: 0, overdue: 0 });
   const [projects, setProjects] = useState([]);
 
-  // Modal State Additions
+
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [projectForm, setProjectForm] = useState({ name: '', description: '' });
   const [error, setError] = useState('');
 
-  // ✅ get user from localStorage
+
   const user = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user"); // ✅ clear user too
+    localStorage.removeItem("user");
     navigate("/");
   };
 
@@ -51,7 +51,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-[url('/bg.jpg')] bg-cover bg-center">
 
-      {/* Navbar */}
+
       <div className="flex justify-between items-center px-6 py-4">
         <h1 className="text-black text-2xl font-bold">Team Task Manager</h1>
         <div className="flex items-center gap-4">
@@ -63,7 +63,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Stat Cards */}
+
       <div className="flex flex-col items-center px-6 py-4 gap-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl">
           {[
@@ -79,7 +79,7 @@ export default function Dashboard() {
           ))}
         </div>
 
-        {/* Projects */}
+
         <div className="bg-black rounded-xl w-full max-w-4xl p-6">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-cyan-400 text-xl font-bold">My Projects</h2>
@@ -110,7 +110,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* New Project Modal */}
+
       {showProjectModal && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 px-4">
           <div className="bg-black border-2 border-cyan-400 rounded-xl w-full max-w-md p-6">

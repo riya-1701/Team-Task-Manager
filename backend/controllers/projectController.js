@@ -1,6 +1,6 @@
 import Project from '../models/Project.js';
 
-// get all projects for login members
+
 export const getProjects = async (req, res) => {
   try {
     const projects = await Project.find({
@@ -12,7 +12,7 @@ export const getProjects = async (req, res) => {
   }
 };
 
-// CREATE project (admin part)
+
 export const createProject = async (req, res) => {
   const { name, description } = req.body;
   if (!name) return res.status(400).json({ message: 'Project name is required' });
@@ -26,7 +26,7 @@ export const createProject = async (req, res) => {
   }
 };
 
-// DELETE project (admin part)
+
 export const deleteProject = async (req, res) => {
   try {
     const project = await Project.findById(req.params.id);
@@ -40,7 +40,7 @@ export const deleteProject = async (req, res) => {
   }
 };
 
-// GET single project by ID
+
 export const getProjectById = async (req, res) => {
   try {
     const project = await Project.findById(req.params.id)
@@ -60,7 +60,7 @@ export const getProjectById = async (req, res) => {
   }
 };
 
-// ADD project member
+
 export const addProjectMember = async (req, res) => {
   try {
     const { userId } = req.body;
@@ -87,7 +87,7 @@ export const addProjectMember = async (req, res) => {
   }
 };
 
-// REMOVE project member
+
 export const removeProjectMember = async (req, res) => {
   try {
     const project = await Project.findById(req.params.id);

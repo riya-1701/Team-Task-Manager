@@ -2,7 +2,7 @@ import Task from '../models/Tasks.js';
 import Project from '../models/Project.js';
 import User from '../models/User.js';
 
-// GET all tasks for a project
+
 export const getTasks = async (req, res) => {
   try {
     const tasks = await Task.find({ project: req.params.projectId })
@@ -13,7 +13,7 @@ export const getTasks = async (req, res) => {
   }
 };
 
-// craete a task
+
 export const createTask = async (req, res) => {
   const { title, description, priority, assignedTo, dueDate } = req.body;
   if (!title) return res.status(400).json({ message: 'Title is required' });
@@ -21,7 +21,7 @@ export const createTask = async (req, res) => {
     const project = await Project.findById(req.params.projectId);
     if (!project) return res.status(404).json({ message: 'Project not found' });
     
-    // Only project creator can add tasks
+
     if (project.createdBy.toString() !== req.user.id) {
       return res.status(403).json({ message: 'Not authorized to create tasks' });
     }
@@ -37,7 +37,7 @@ export const createTask = async (req, res) => {
   }
 };
 
-// update task status
+
 export const updateTask = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
@@ -61,7 +61,7 @@ export const updateTask = async (req, res) => {
   }
 };
 
-// deleete task
+
 export const deleteTask = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
@@ -79,7 +79,7 @@ export const deleteTask = async (req, res) => {
   }
 };
 
-// get dashboard stats
+
 export const getDashboardStats = async (req, res) => {
   try {
     const user = await User.findById(req.user.id);

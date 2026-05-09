@@ -9,7 +9,7 @@ const navigate = useNavigate();
   const handlelogic = async()=>{
           if(!email || !password) return alert("Please Enter Email & Password!");
           try{
-            //http://localhost:5000/login
+
               const response = await fetch("https://team-task-manager-8lzk.onrender.com/login",{
                   method: "POST",
                   headers:{
@@ -19,13 +19,13 @@ const navigate = useNavigate();
               });
               const data = await response.json();
               console.log(data);
-              //successs
+
               if(response.ok){
-                // alert("Login Successful")
-                //store token
+
+
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("user", JSON.stringify(data.user));
-                //navigate to dashboard
+
                 navigate("/dashboard")
               }else{
                 alert(data.message || "Login Unsuccessful")

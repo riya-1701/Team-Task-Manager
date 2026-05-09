@@ -14,7 +14,7 @@ const app = express();
 app.use(cors({ origin: '*', credentials: true }));
 app.use(express.json());
 
-// Routes
+
 app.use('/', authRoutes);
 app.use('/projects', projectRoutes);
 app.use('/tasks', taskRoutes);

@@ -6,7 +6,7 @@ import { validationResult } from "express-validator";
 const generateToken = (userId) =>
   jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
-//signup
+
 export const signup = async (req, res) => {
     console.log("signup api called");
   
@@ -26,7 +26,7 @@ export const signup = async (req, res) => {
 }
 console.log("creating new user...")
 
-//hash password
+
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
     console.log("Password hashed");
@@ -59,7 +59,7 @@ console.log("creating new user...")
   }
 };
 
-// login
+
 export const login = async (req, res) => {
   console.log("login api called");
 

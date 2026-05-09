@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-// import { useEffect } from "react";
+
 const SignupPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,7 +11,7 @@ const SignupPage = () => {
   const handlelogic = async () => {
     if (!name || !email || !password) return alert("Please Enter All Details");
     try {
-      // http://localhost:5000/signup
+
       const response = await fetch("https://team-task-manager-8lzk.onrender.com/signup", {
         method: "POST",
         headers: {
