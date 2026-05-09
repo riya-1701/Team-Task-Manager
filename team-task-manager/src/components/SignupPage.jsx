@@ -11,7 +11,8 @@ const SignupPage = () => {
   const handlelogic = async () => {
     if (!name || !email || !password) return alert("Please Enter All Details");
     try {
-      const response = await fetch("http://localhost:5000/signup", {
+      // http://localhost:5000/signup
+      const response = await fetch("https://team-task-manager-8lzk.onrender.com", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
