@@ -12,7 +12,7 @@ const SignupPage = () => {
     if (!name || !email || !password) return alert("Please Enter All Details");
     try {
       // http://localhost:5000/signup
-      const response = await fetch("https://team-task-manager-8lzk.onrender.com", {
+      const response = await fetch("https://team-task-manager-8lzk.onrender.com/signup", {
         method: "POST",
         headers: {
           "Content-type": "application/json",

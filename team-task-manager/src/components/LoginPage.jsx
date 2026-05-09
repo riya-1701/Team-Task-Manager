@@ -10,7 +10,7 @@ const navigate = useNavigate();
           if(!email || !password) return alert("Please Enter Email & Password!");
           try{
             //http://localhost:5000/login
-              const response = await fetch("https://team-task-manager-8lzk.onrender.com",{
+              const response = await fetch("https://team-task-manager-8lzk.onrender.com/login",{
                   method: "POST",
                   headers:{
                       "Content-type": "application/json",
