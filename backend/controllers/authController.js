@@ -39,12 +39,12 @@ console.log("creating new user...")
     });
     console.log("User registered successfully: ", user.email);
 
-    // const token = generateToken(user._id);
-    // console.log("token generated successfully")
+    const token = generateToken(user._id);
+    console.log("token generated successfully")
 
     res.status(201).json({
       message: "User Registered Successfully",
-        // token,
+        token,
       user: {
         id: user._id,
         name: user.name,
